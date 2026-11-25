@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHARGE PRO — Драганов С.С. — ВАГПК (ИСП-25)</title>
+    
+    <!-- Favicon - логотип на вкладке сайта -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%233b82f6'/%3E%3Cpath d='M55 20 L35 55 L50 55 L45 80 L65 45 L50 45 Z' fill='%23fbbf24'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/png" href="https://vagpk11.gosuslugi.ru/netcat_files/cs/vagpk.png">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #3b82f6;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: bold; color: #60a5fa; }
+        .logo-icon {
+            width: 45px; height: 45px;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+        }
+        .college-logo-link { text-decoration: none; color: inherit; transition: transform 0.3s, opacity 0.3s; }
+        .college-logo-link:hover { transform: scale(1.05); opacity: 0.9; }
+        .college-logo {
+            display: flex; align-items: center; gap: 10px;
+            background: rgba(59, 130, 246, 0.1);
+            padding: 8px 15px; border-radius: 10px; border: 1px solid #3b82f6;
+        }
+        .vagpk-logo-img { width: 40px; height: 40px; object-fit: contain; border-radius: 5px; background: #fff; padding: 3px; }
+        .logo-fallback {
+            width: 40px; height: 40px; background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: #fff; border-radius: 5px; display: none; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 11px;
+        }
+        .college-name { font-size: 16px; font-weight: bold; color: #fbbf24; letter-spacing: 1px; }
+        nav a { color: #cbd5e1; text-decoration: none; margin-left: 18px; transition: color 0.3s; font-weight: 500; font-size: 14px; }
+        nav a:hover { color: #60a5fa; }
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 50%, #1e293b 100%);
+            padding: 80px 40px; text-align: center; position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 1; } }
+        .hero-content { position: relative; z-index: 1; }
+        .hero h1 {
+            font-size: 44px; margin-bottom: 20px;
+            background: linear-gradient(90deg, #60a5fa, #06b6d4);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { font-size: 18px; color: #94a3b8; margin-bottom: 10px; }
+        .student-name { font-size: 26px; color: #fbbf24; margin-top: 20px; font-weight: bold; }
+        .college-banner-link { text-decoration: none; color: inherit; display: block; transition: transform 0.3s, box-shadow 0.3s; }
+        .college-banner-link:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2); }
+        .college-banner {
+            display: flex; align-items: center; justify-content: center; gap: 20px;
+            margin-top: 30px; padding: 20px;
+            background: rgba(30, 41, 59, 0.8); border-radius: 15px; border: 1px solid #3b82f6;
+            max-width: 720px; margin-left: auto; margin-right: auto;
+        }
+        .college-banner img { width: 80px; height: 80px; object-fit: contain; background: #fff; border-radius: 10px; padding: 5px; }
+        .college-banner-text { text-align: left; }
+        .college-banner-text h3 { color: #fbbf24; font-size: 20px; margin-bottom: 5px; }
+        .college-banner-text p { color: #94a3b8; font-size: 14px; margin: 3px 0; }
+        .badges { display: flex; justify-content: center; gap: 15px; margin-top: 30px; flex-wrap: wrap; }
+        .badge { background: rgba(59, 130, 246, 0.15); border: 1px solid #3b82f6; padding: 10px 20px; border-radius: 25px; font-size: 14px; }
+        section { padding: 60px 40px; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 32px; margin-bottom: 30px; color: #60a5fa; border-left: 4px solid #3b82f6; padding-left: 15px; }
+        .specialty-info { background: #1e293b; padding: 30px; border-radius: 15px; margin-bottom: 30px; border: 1px solid #334155; }
+        .specialty-info h3 { color: #fbbf24; margin-bottom: 10px; }
+        .specialty-code { display: inline-block; background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 5px 12px; border-radius: 8px; font-size: 14px; margin-top: 10px; font-weight: bold; }
+        .subjects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
+        .subject { background: linear-gradient(135deg, #1e293b, #334155); padding: 20px; border-radius: 10px; border-left: 4px solid #06b6d4; transition: transform 0.3s, box-shadow 0.3s; }
+        .subject:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(6, 182, 212, 0.3); }
+        .subject-num { color: #06b6d4; font-weight: bold; font-size: 18px; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .gallery-item { background: #1e293b; border-radius: 15px; overflow: hidden; border: 1px solid #334155; transition: transform 0.3s; }
+        .gallery-item:hover { transform: scale(1.03); }
+        .gallery-img { width: 100%; height: 220px; background: #0b1220; overflow: hidden; }
+        .gallery-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
+        .gallery-item:hover .gallery-img img { transform: scale(1.08); }
+        .gallery-caption { padding: 15px; color: #cbd5e1; font-size: 14px; }
+        .model-section { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 20px; padding: 40px; border: 2px solid #3b82f6; }
+        .model-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .video-wrapper {
+            background: linear-gradient(135deg, #1e3a8a, #0f172a);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #60a5fa;
+            box-shadow: 0 10px 40px rgba(59,130,246,0.3);
+            position: relative;
+            width: 100%;
+        }
+        /* Адаптивное видео для всех устройств */
+        .video-wrapper video {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            display: block;
+            background: #0f172a;
+            object-fit: contain;
+        }
+        .video-badge {
+            position: absolute; top: 15px; left: 15px;
+            background: rgba(251, 191, 36, 0.9); color: #0f172a;
+            padding: 5px 12px; border-radius: 20px;
+            font-size: 12px; font-weight: bold; letter-spacing: 0.5px; z-index: 10;
+        }
+        .video-fallback {
+            display: none; width: 100%; min-height: 300px;
+            background: linear-gradient(135deg, #1e3a8a, #0f172a);
+            border-radius: 15px; align-items: center; justify-content: center;
+            flex-direction: column; color: #fbbf24; text-align: center; padding: 40px;
+        }
+        .video-fallback.active { display: flex; }
+        .video-fallback-icon { font-size: 64px; margin-bottom: 20px; }
+        .video-fallback-text { font-size: 16px; color: #cbd5e1; margin-top: 10px; }
+        .video-download-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #3b82f6;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        .video-download-link:hover { background: #2563eb; }
+        .model-info h3 { color: #fbbf24; font-size: 24px; margin-bottom: 15px; }
+        .model-signature { background: rgba(251, 191, 36, 0.1); border-left: 4px solid #fbbf24; padding: 15px; margin: 20px 0; font-style: italic; color: #fcd34d; }
+        .specs { list-style: none; margin-top: 20px; }
+        .specs li { padding: 8px 0; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; }
+        .specs li span:first-child { color: #94a3b8; }
+        .specs li span:last-child { color: #60a5fa; font-weight: bold; }
+        .gif-wrap { max-width: 600px; margin: 0 auto; text-align: center; }
+        .gif-frame { border-radius: 15px; overflow: hidden; border: 2px solid #3b82f6; box-shadow: 0 10px 40px rgba(59,130,246,0.25); background: #0f172a; padding: 15px; }
+        .charging-gif { width: 100%; height: auto; display: block; border-radius: 10px; }
+        .gif-note { text-align: center; color: #94a3b8; font-size: 14px; margin-top: 10px; line-height: 1.4; }
+        footer { background: #020617; padding: 40px; text-align: center; border-top: 2px solid #3b82f6; margin-top: 60px; }
+        footer p { color: #64748b; margin: 5px 0; }
+        .contact-info { margin-top: 20px; color: #94a3b8; }
+        .footer-logo-link { display: inline-block; transition: transform 0.3s; }
+        .footer-logo-link:hover { transform: scale(1.1); }
+        .footer-logo { width: 80px; height: 80px; object-fit: contain; border-radius: 10px; border: 2px solid #3b82f6; background: #fff; padding: 5px; }
+        
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .model-content { grid-template-columns: 1fr; gap: 20px; }
+            .hero h1 { font-size: 28px; }
+            .hero { padding: 50px 20px; }
+            header { flex-direction: column; padding: 10px 15px; }
+            nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
+            nav a { margin: 5px 8px; font-size: 12px; }
+            .college-banner { flex-direction: column; padding: 15px; }
+            .college-banner img { width: 60px; height: 60px; }
+            section { padding: 40px 20px; }
+            .section-title { font-size: 24px; }
+            .model-info h3 { font-size: 20px; }
+            .video-wrapper video { max-height: 300px; }
+            .student-name { font-size: 20px; }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 24px; }
+            .logo { font-size: 18px; }
+            .logo-icon { width: 38px; height: 38px; font-size: 20px; }
+            .college-name { font-size: 14px; }
+            .vagpk-logo-img { width: 32px; height: 32px; }
+            .video-wrapper video { max-height: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon">⚡</div>
+            <span>CHARGE PRO</span>
+        </div>
+        <a href="https://vagpk11.gosuslugi.ru/" target="_blank" class="college-logo-link" title="Перейти на сайт ВАГПК">
+            <div class="college-logo">
+                <img src="https://vagpk11.gosuslugi.ru/netcat_files/cs/vagpk.png" alt="Логотип ВАГПК" class="vagpk-logo-img"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="logo-fallback">ВАГПК</div>
+                <span class="college-name">ВАГПК</span>
+            </div>
+        </a>
+        <nav>
+            <a href="#home">Главная</a>
+            <a href="#specialty">Специальность</a>
+            <a href="#gallery">Галерея</a>
+            <a href="#model">3D-модель</a>
+            <a href="#animation">Анимация</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>⚡ Зарядное устройство Type-C нового поколения</h1>
+            <p>Проект по дисциплине «Графический дизайн и мультимедиа»</p>
+            <p class="student-name">👨‍🎓 Драганов Святослав Сергеевич</p>
+            <a href="https://vagpk11.gosuslugi.ru/" target="_blank" class="college-banner-link" title="Перейти на сайт ВАГПК">
+                <div class="college-banner">
+                    <img src="https://vagpk11.gosuslugi.ru/netcat_files/cs/vagpk.png" alt="Логотип ВАГПК" onerror="this.style.display='none';">
+                    <div class="college-banner-text">
+                        <h3>ВАГПК</h3>
+                        <p>Воркутинский арктический горно-промышленный колледж</p>
+                        <p style="color: #60a5fa; margin-top: 5px; font-weight: bold;">
+                            Специальность: Информационные системы и программирование (ИСП-25)
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <div class="badges">
+                <div class="badge">💻 ИСП-25</div>
+                <div class="badge">🏫 ВАГПК</div>
+                <div class="badge">📅 2026 год</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="specialty">
+        <h2 class="section-title">📚 Специальность и предметы</h2>
+        <div class="specialty-info">
+            <h3>💻 Специальность: Информационные системы и программирование (ИСП-25)</h3>
+            <p>Подготовка специалистов в области разработки программного обеспечения,
+               проектирования информационных систем, веб-разработки и администрирования баз данных.</p>
+            <span class="specialty-code">Код специальности: 09.02.07</span>
+        </div>
+        <h3 style="color: #60a5fa; margin-bottom: 20px;">Перечень изучаемых предметов:</h3>
+        <div class="subjects-grid">
+            <div class="subject"><span class="subject-num">01.</span> Основы алгоритмизации и программирования</div>
+            <div class="subject"><span class="subject-num">02.</span> Информационные технологии</div>
+            <div class="subject"><span class="subject-num">03.</span> Базы данных</div>
+            <div class="subject"><span class="subject-num">04.</span> Графический дизайн и мультимедиа</div>
+            <div class="subject"><span class="subject-num">05.</span> Операционные системы</div>
+            <div class="subject"><span class="subject-num">06.</span> Компьютерные сети</div>
+            <div class="subject"><span class="subject-num">07.</span> Архитектура аппаратных средств</div>
+            <div class="subject"><span class="subject-num">08.</span> Программная инженерия</div>
+            <div class="subject"><span class="subject-num">09.</span> Системное администрирование</div>
+            <div class="subject"><span class="subject-num">10.</span> Математика для IT-специалистов</div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2 class="section-title">🖼️ Галерея проекта и специальности</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <div class="gallery-img">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop" alt="Разработка программного обеспечения" loading="lazy">
+                </div>
+                <div class="gallery-caption">Разработка программного обеспечения и алгоритмов (ИСП-25)</div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-img">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&auto=format&fit=crop" alt="Архитектура аппаратных средств" loading="lazy">
+                </div>
+                <div class="gallery-caption">Архитектура аппаратных средств и компьютерные сети</div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-img">
+                    <img src="https://image.qwenlm.ai/public_source/89e32789-61a1-4d9d-b02b-c99b3bddd0de/314a1681c-5e33-4e3a-acca-26309f8c7a325536.png" alt="Сетевая зарядка 65W" loading="lazy">
+                </div>
+                <div class="gallery-caption">Компактное сетевое зарядное устройство 65W (GaN, USB-C)</div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-img">
+                    <img src="https://image.qwenlm.ai/public_source/89e32789-61a1-4d9d-b02b-c99b3bddd0de/314a1681c-5e33-4e3a-acca-26309f8c7a321732.png" alt="Беспроводная Qi-зарядка" loading="lazy">
+                </div>
+                <div class="gallery-caption">Беспроводная Qi-зарядка-подставка с кабелем Type-C</div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-img">
+                    <img src="https://image.qwenlm.ai/public_source/89e32789-61a1-4d9d-b02b-c99b3bddd0de/214a1681c-5e33-4e3a-acca-26309f8c7a326330.png" alt="Powerbank 20000 mAh" loading="lazy">
+                </div>
+                <div class="gallery-caption">Портативный аккумулятор с быстрой зарядкой 22.5W</div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-img">
+                    <img src="https://image.qwenlm.ai/public_source/89e32789-61a1-4d9d-b02b-c99b3bddd0de/414a1681c-5e33-4e3a-acca-26309f8c7a329125.png" alt="Магнитный powerbank" loading="lazy">
+                </div>
+                <div class="gallery-caption">Магнитный powerbank с беспроводной зарядкой (MagSafe)</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="model">
+        <h2 class="section-title">🧊 3D-модель изделия (видео-презентация)</h2>
+        <div class="model-section">
+            <div class="model-content">
+                <div class="video-wrapper">
+                    <span class="video-badge">▶ РЕНДЕР МОДЕЛИ</span>
+                    <!-- 
+                        Видео с максимальной совместимостью для всех устройств:
+                        - autoplay + muted: автозапуск в Chrome/Safari/Firefox
+                        - playsinline: не разворачивается на весь экран на iPhone/iPad
+                        - loop: зацикливание
+                        - controls: элементы управления для ручного запуска
+                        - preload="auto": предварительная загрузка
+                        - Несколько форматов: MP4 (все), WebM (Chrome/Firefox), OGG (Firefox)
+                    -->
+                    <video id="modelVideo" 
+                           autoplay 
+                           loop 
+                           muted 
+                           playsinline 
+                           controls 
+                           preload="auto"
+                           width="100%"
+                           height="auto">
+                        <source src="charge2.mp4" type="video/mp4; codecs='avc1.42E01E, mp4a.40.2'">
+                        <source src="charge2.mp4" type="video/mp4">
+                        <source src="charge2.webm" type="video/webm; codecs='vp9, opus'">
+                        <source src="charge2.webm" type="video/webm">
+                        <source src="charge2.ogv" type="video/ogg; codecs='theora, vorbis'">
+                        <source src="charge2.ogv" type="video/ogg">
+                        <!-- Для очень старых браузеров -->
+                        <object data="charge2.mp4" type="video/mp4" width="100%" height="auto">
+                            <embed src="charge2.mp4" type="video/mp4" width="100%" height="auto">
+                        </object>
+                        <p style="color: #fbbf24; padding: 20px; text-align: center;">
+                            Ваш браузер не поддерживает встроенное видео. 
+                            <a href="charge2.mp4" download style="color: #60a5fa;">Скачайте файл charge2.mp4</a>
+                        </p>
+                    </video>
+                    <div class="video-fallback" id="videoFallback">
+                        <div class="video-fallback-icon">🎬</div>
+                        <div><strong>Видео не загружено</strong></div>
+                        <div class="video-fallback-text">
+                            Файл charge2.mp4 не найден.<br>
+                            Убедитесь, что файл лежит в той же папке, что и index.html
+                        </div>
+                        <a href="charge2.mp4" download class="video-download-link">⬇️ Скачать видео</a>
+                    </div>
+                </div>
+                <div class="model-info">
+                    <h3>Зарядное устройство Type-C (charge.obj)</h3>
+                    <div class="model-signature">
+                        📌 <strong>Подпись:</strong> 3D-модель зарядного устройства Type-C, 
+                        разработанная студентом группы ИСП-25. Видео демонстрирует рендер модели 
+                        в рабочем положении — подключённой к сетевой розетке. 
+                        Корпус оптимизирован для FDM 3D-печати из ABS-пластика.
+                    </div>
+                    <h4 style="color: #60a5fa; margin-top: 20px;">🎯 Назначение изделия:</h4>
+                    <p style="margin-top: 10px; color: #cbd5e1;">
+                        Компактное зарядное устройство с разъёмом USB Type-C, предназначенное для 
+                        быстрой и безопасной зарядки мобильных устройств. Эргономичный корпус 
+                        обеспечивает удобный хват, а внутренние каналы способствуют пассивному 
+                        отводу тепла. Модель создана с учётом стандартов безопасности и 
+                        совместимости с протоколами быстрой зарядки (PD/QC).
+                    </p>
+                    <ul class="specs">
+                        <li><span>Разъём:</span><span>USB Type-C</span></li>
+                        <li><span>Материал:</span><span>ABS-пластик / Поликарбонат</span></li>
+                        <li><span>Мощность:</span><span>до 65W (Power Delivery)</span></li>
+                        <li><span>Особенности:</span><span>Защита от перегрева, компактный размер</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="animation">
+        <h2 class="section-title">⚡ Анимация работы устройства</h2>
+        <div class="gif-wrap">
+            <div class="gif-frame">
+                <img src="https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif" alt="Анимация процесса зарядки" class="charging-gif">
+            </div>
+            <p class="gif-note">🔄 Процесс зарядки и индикация уровня энергии</p>
+        </div>
+    </section>
+
+    <footer id="contacts">
+        <h3 style="color: #60a5fa; margin-bottom: 15px;">📧 Контакты</h3>
+        <a href="https://vagpk11.gosuslugi.ru/" target="_blank" class="footer-logo-link" title="Перейти на сайт ВАГПК">
+            <img src="https://vagpk11.gosuslugi.ru/netcat_files/cs/vagpk.png" alt="Логотип ВАГПК" class="footer-logo" onerror="this.style.display='none';">
+        </a>
+        <div class="contact-info">
+            <p><strong>Студент:</strong> Драганов Святослав Сергеевич</p>
+            <p><strong>Учебное заведение:</strong> ВАГПК</p>
+            <p><strong>Специальность:</strong> Информационные системы и программирование (ИСП-25)</p>
+            <p><strong>Код специальности:</strong> 09.02.07</p>
+            <p><strong>Дисциплина:</strong> Графический дизайн и мультимедиа</p>
+            <p><strong>Год:</strong> 2026</p>
+        </div>
+        <p style="margin-top: 30px; font-size: 12px;">
+            © 2026 CHARGE PRO | ВАГПК. Создано в рамках учебного проекта.
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('modelVideo');
+            const fallback = document.getElementById('videoFallback');
+            
+            // Функция показа запасного варианта
+            function showFallback() {
+                video.style.display = 'none';
+                fallback.classList.add('active');
+            }
+            
+            // Обработка ошибок загрузки
+            video.addEventListener('error', function(e) {
+                console.error('Ошибка загрузки видео:', e);
+                showFallback();
+            });
+            
+            // Проверка через 3 секунды — загрузилось ли видео
+            setTimeout(function() {
+                // networkState === 3 означает NETWORK_NO_SOURCE (файл не найден)
+                if (video.readyState === 0 && video.networkState === 3) {
+                    showFallback();
+                }
+                // Если видео не начало воспроизводиться в течение 5 секунд
+                if (video.paused && video.currentTime === 0) {
+                    // Пытаемся запустить вручную (для мобильных устройств)
+                    video.play().catch(function(err) {
+                        console.log('Автозапуск заблокирован браузером:', err);
+                        // Оставляем controls, чтобы пользователь мог запустить сам
+                    });
+                }
+            }, 3000);
+            
+            // Дополнительная попытка запуска при клике (для iOS)
+            video.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play().catch(function(err) {
+                        console.log('Ошибка воспроизведения:', err);
+                    });
+                }
+            });
+            
+            // Проверка поддержки форматов
+            if (!video.canPlayType('video/mp4') && 
+                !video.canPlayType('video/webm') && 
+                !video.canPlayType('video/ogg')) {
+                showFallback();
+            }
+        });
+    </script>
+
+</body>
+</html>
